@@ -9,7 +9,7 @@ variable "client_secret"{
   type=string
   
 }
-variable "teneant_id"{
+variable "tenant_id"{
   type=string
   
 }
