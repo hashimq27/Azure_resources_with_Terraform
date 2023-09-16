@@ -13,3 +13,6 @@ variable "tenant_id"{
   type=string
   
 }
+variable "prefiz"{
+  type=string
+}
