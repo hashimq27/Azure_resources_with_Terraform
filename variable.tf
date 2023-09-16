@@ -13,7 +13,7 @@ variable "tenant_id"{
   type=string
   
 }
-variable "prefiz"{
+variable "prefix"{
   type=string
   default="azuretutorial"
 }
