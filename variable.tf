@@ -17,3 +17,8 @@ variable "prefix"{
   type=string
   default="azuretutorial"
 }
+
+variable "account_tier"{
+  type=string
+  default="Standard"
+}
