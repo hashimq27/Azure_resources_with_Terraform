@@ -15,4 +15,5 @@ variable "tenant_id"{
 }
 variable "prefiz"{
   type=string
+  default="azuretutorial"
 }
