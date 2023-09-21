@@ -30,5 +30,5 @@ variable "env"{
 
 variable "access_type"{
   type=string
-  default="Private"
+  default="private"
 }
