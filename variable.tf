@@ -32,3 +32,13 @@ variable "access_type"{
   type=string
   default="private"
 }
+
+variable "stroage_type"{
+  type=string
+  default="block"
+}
+
+variable "access_type"{
+  type=string
+  default="private"
+}
