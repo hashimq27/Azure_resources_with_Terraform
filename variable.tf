@@ -40,5 +40,5 @@ variable "stroage_type"{
 
 variable "storage_source"{
   type=string
-  default="private"
+  default="some-local-file.zip"
 }
