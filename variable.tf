@@ -35,10 +35,10 @@ variable "access_type"{
 
 variable "stroage_type"{
   type=string
-  default="block"
+  default="Block"
 }
 
-variable "access_type"{
+variable "storage_source"{
   type=string
   default="private"
 }
