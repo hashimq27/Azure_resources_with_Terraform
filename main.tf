@@ -16,16 +16,16 @@ resource "azurerm_storage_account" "awp" {
     environment = "staging"
   }
 }
-resource "azurerm_storage_container" "example" {
-  name                  = "content"
-  storage_account_name  = azurerm_storage_account.example.name
+resource "azurerm_storage_container" "storecont" {
+  name                  = "${var.prefix}cont${var.env}"
+  storage_account_name  = azurerm_storage_account.awp.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_blob" "blobstorage" {
   name                   = "${var.prefix}blob${var.env}"
-  storage_account_name   = azurerm_storage_account.batch06.name
-  storage_container_name = azurerm_storage_container.batch06.name
+  storage_account_name   = azurerm_storage_account.awp.name
+  storage_container_name = azurerm_storage_container.storecont.name
   type                   = "Block"
   source                 = "some-local-file.zip"
 }
