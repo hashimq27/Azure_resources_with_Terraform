@@ -26,6 +26,6 @@ resource "azurerm_storage_blob" "blobstorage" {
   name                   = "${var.prefix}blob${var.env}"
   storage_account_name   = azurerm_storage_account.awp.name
   storage_container_name = azurerm_storage_container.storecont.name
-  type                   = "Block"
-  source                 = "some-local-file.zip"
+  type                   = var.storage_tyoe
+  source                 = var.storage_access
 }
