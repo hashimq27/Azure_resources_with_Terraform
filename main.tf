@@ -19,7 +19,7 @@ resource "azurerm_storage_account" "awp" {
 resource "azurerm_storage_container" "storecont" {
   name                  = "${var.prefix}cont${var.env}"
   storage_account_name  = azurerm_storage_account.awp.name
-  container_access_type = "private"
+  container_access_type = var.access_type
 }
 
 resource "azurerm_storage_blob" "blobstorage" {
