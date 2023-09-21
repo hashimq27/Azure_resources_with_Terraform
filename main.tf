@@ -16,6 +16,11 @@ resource "azurerm_storage_account" "awp" {
     environment = "staging"
   }
 }
+resource "azurerm_storage_container" "example" {
+  name                  = "content"
+  storage_account_name  = azurerm_storage_account.example.name
+  container_access_type = "private"
+}
 
 resource "azurerm_storage_blob" "blobstorage" {
   name                   = "${var.prefix}blob${var.env}"
