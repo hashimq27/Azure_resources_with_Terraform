@@ -27,5 +27,5 @@ resource "azurerm_storage_blob" "blobstorage" {
   storage_account_name   = azurerm_storage_account.awp.name
   storage_container_name = azurerm_storage_container.storecont.name
   type                   = var.storage_tyoe
-  source                 = var.storage_access
+  source                 = var.storage_source
 }
