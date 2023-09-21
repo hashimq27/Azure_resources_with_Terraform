@@ -27,3 +27,8 @@ variable "env"{
   type=string
   default="dev"
 }
+
+variable "access_type"{
+  type=string
+  default="Private"
+}
