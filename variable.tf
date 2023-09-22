@@ -33,7 +33,7 @@ variable "access_type"{
   default="private"
 }
 
-variable "stroage_type"{
+variable "storage_type"{
   type=string
   default="Block"
 }
