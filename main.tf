@@ -53,11 +53,11 @@ resource "azurerm_kubernetes_cluster" "kube1" {
 
 output "client_certificate" {
   value     = azurerm_kubernetes_cluster.kube1.kube_config.0.client_certificate
-  sensitive = var.cert_sensitive
+  sensitive = true
 }
 
 output "kube_config" {
   value = azurerm_kubernetes_cluster.kube1.kube_config_raw
 
-  sensitive = true
+  sensitive = var.kube_sensitive
 }
