@@ -74,7 +74,7 @@ variable "kube_env"{
 }
 
 variable "node_count"{
-  type=int
+  type=number
   default=1
 }
 
