@@ -31,29 +31,29 @@ resource "azurerm_storage_blob" "blobstorage" {
 }
 
 resource "azurerm_kubernetes_cluster" "kube1" {
-  name                = "example-aks1"
+  name                = var.kube_name
   location            = azurerm_resource_group.batch06.location
   resource_group_name = azurerm_resource_group.batch06.name
-  dns_prefix          = "exampleaks1"
+  dns_prefix          = var.kube_dns
 
   default_node_pool {
-    name       = "default"
-    node_count = 1
-    vm_size    = "Standard_D2_v2"
+    name       = var.pool_name
+    node_count = var.node_count
+    vm_size    = var.vm_size
   }
 
   identity {
-    type = "SystemAssigned"
+    type = var.kube_identity
   }
 
   tags = {
-    Environment = "Production"
+    Environment = var.kube_env
   }
 }
 
 output "client_certificate" {
   value     = azurerm_kubernetes_cluster.kube1.kube_config.0.client_certificate
-  sensitive = true
+  sensitive = var.cert_sensitive
 }
 
 output "kube_config" {
