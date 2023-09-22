@@ -83,11 +83,6 @@ variable "cert_sensitive"{
   default=true
 }
 
-variable "node_count"{
-  type=int
-  default=1
-}
-
 variable "kube_sensitive"{
   type=bool
   default=true
