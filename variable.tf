@@ -42,3 +42,33 @@ variable "storage_source"{
   type=string
   default="some-local-file.zip"
 }
+
+variable "kube_name"{
+  type=string
+  default="example_aks1"
+}
+
+variable "kube_dns"{
+  type=string
+  default="exampleaks1"
+}
+
+variable "pool_name"{
+  type=string
+  default="default"
+}
+
+variable "vm_size"{
+  type=string
+  default="Standard_D2_v2"
+}
+
+variable "kube_identity"{
+  type=string
+  default="SystemAssigned"
+}
+
+variable "kube_env"{
+  type=string
+  default="Production"
+}
