@@ -88,3 +88,22 @@ variable "kube_sensitive"{
   default=true
 }
 
+variable "ip_name"{
+  type=string
+  default="PublicIPForLB"
+}
+
+variable "method_allocation"{
+  type=string
+  default="Static"
+}
+
+variable "lb_name"{
+  type=string
+  default="TestLoadBalancer"
+}
+
+variable "ipconfig_name"{
+  type=string
+  default="PublicIPAddress"
+}
