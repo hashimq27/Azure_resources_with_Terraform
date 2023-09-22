@@ -30,10 +30,10 @@ resource "azurerm_storage_blob" "blobstorage" {
   source                 = var.storage_source
 }
 
-resource "azurerm_kubernetes_cluster" "example" {
+resource "azurerm_kubernetes_cluster" "kube1" {
   name                = "example-aks1"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.batch06.location
+  resource_group_name = azurerm_resource_group.batch06.name
   dns_prefix          = "exampleaks1"
 
   default_node_pool {
@@ -52,12 +52,12 @@ resource "azurerm_kubernetes_cluster" "example" {
 }
 
 output "client_certificate" {
-  value     = azurerm_kubernetes_cluster.example.kube_config.0.client_certificate
+  value     = azurerm_kubernetes_cluster.kube1.kube_config.0.client_certificate
   sensitive = true
 }
 
 output "kube_config" {
-  value = azurerm_kubernetes_cluster.example.kube_config_raw
+  value = azurerm_kubernetes_cluster.kube1.kube_config_raw
 
   sensitive = true
 }
