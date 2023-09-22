@@ -72,3 +72,24 @@ variable "kube_env"{
   type=string
   default="Production"
 }
+
+variable "node_count"{
+  type=int
+  default=1
+}
+
+variable "cert_sensitive"{
+  type=bool
+  default=true
+}
+
+variable "node_count"{
+  type=int
+  default=1
+}
+
+variable "cert_sensitive"{
+  type=bool
+  default=true
+}
+
