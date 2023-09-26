@@ -7,40 +7,40 @@ resource "azurerm_virtual_network" "vn" {
 
 resource "azurerm_subnet" "frontend" {
   name                 = "frontend"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+  resource_group_name  = azurerm_resource_group.batch06.name
+  virtual_network_name = azurerm_virtual_network.vn.name
   address_prefixes     = ["10.254.0.0/24"]
 }
 
 resource "azurerm_subnet" "backend" {
   name                 = "backend"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+  resource_group_name  = azurerm_resource_group.batch06.name
+  virtual_network_name = azurerm_virtual_network.vn.name
   address_prefixes     = ["10.254.2.0/24"]
 }
 
-resource "azurerm_public_ip" "example" {
+resource "azurerm_public_ip" "publicIP" {
   name                = "example-pip"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.batch06.name
+  location            = azurerm_resource_group.batch06.location
   allocation_method   = "Dynamic"
 }
 
 # since these variables are re-used - a locals block makes this more maintainable
 locals {
-  backend_address_pool_name      = "${azurerm_virtual_network.example.name}-beap"
-  frontend_port_name             = "${azurerm_virtual_network.example.name}-feport"
-  frontend_ip_configuration_name = "${azurerm_virtual_network.example.name}-feip"
-  http_setting_name              = "${azurerm_virtual_network.example.name}-be-htst"
-  listener_name                  = "${azurerm_virtual_network.example.name}-httplstn"
-  request_routing_rule_name      = "${azurerm_virtual_network.example.name}-rqrt"
-  redirect_configuration_name    = "${azurerm_virtual_network.example.name}-rdrcfg"
+  backend_address_pool_name      = "${azurerm_virtual_network.vn.name}-beap"
+  frontend_port_name             = "${azurerm_virtual_network.vn.name}-feport"
+  frontend_ip_configuration_name = "${azurerm_virtual_network.vn.name}-feip"
+  http_setting_name              = "${azurerm_virtual_network.vn.name}-be-htst"
+  listener_name                  = "${azurerm_virtual_network.vn.name}-httplstn"
+  request_routing_rule_name      = "${azurerm_virtual_network.vn.name}-rqrt"
+  redirect_configuration_name    = "${azurerm_virtual_network.vn.name}-rdrcfg"
 }
 
 resource "azurerm_application_gateway" "network" {
   name                = "example-appgateway"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.batch06.name
+  location            = azurerm_resource_group.batch06.location
 
   sku {
     name     = "Standard_Small"
@@ -60,7 +60,7 @@ resource "azurerm_application_gateway" "network" {
 
   frontend_ip_configuration {
     name                 = local.frontend_ip_configuration_name
-    public_ip_address_id = azurerm_public_ip.example.id
+    public_ip_address_id = azurerm_public_ip.publicIP.id
   }
 
   backend_address_pool {
