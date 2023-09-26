@@ -95,7 +95,7 @@ variable "ip_name"{
 
 variable "method_allocation"{
   type=string
-  default="Static"
+  default="Dynamic"
 }
 
 variable "lb_name"{
@@ -106,4 +106,19 @@ variable "lb_name"{
 variable "ipconfig_name"{
   type=string
   default="PublicIPAddress"
+}
+
+variable "vn_name"{
+  type=string
+  default="example_network"
+}
+
+variable "subnet_front"{
+  type=string
+  default="frontend"
+}
+
+variable "subnet_back"{
+  type=string
+  default="backend"
 }
