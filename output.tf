@@ -1,3 +1,3 @@
 output "name" {
-    value=[for x in locals.student_names: student]
+    value=[for x in local.student_names: student]
 }
