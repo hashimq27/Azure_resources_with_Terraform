@@ -1,3 +1,3 @@
 locals {
-    student_names=["Hashim","Salik","Thomas", "Name1", "Name2"]
+    student_names=["hashim","salik","thomas", "name1", "name2"]
 }
