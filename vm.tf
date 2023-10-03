@@ -1,3 +1,9 @@
+resource "azurerm_network_interface" "main" {
+  name                = "netinterface"
+  location            = azurerm_resource_group.batch06.location
+  resource_group_name = azurerm_resource_group.batch06.name
+}
+
 resource "azurerm_virtual_machine" "main" {
   for_each              = {for x in local.deployment: x=> x}
   name                  = each.key
