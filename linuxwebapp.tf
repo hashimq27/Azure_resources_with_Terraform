@@ -16,3 +16,11 @@ resource "azurerm_linux_web_app" "linwebapp" {
 
   site_config {}
 }
+
+resource "azurerm_linux_web_app_slot" "linuxappslot" {
+  for_each       = {for x in local.deployment: x=>x}
+  name           = each.key
+  app_service_id = azurerm_linux_web_app.linwebapp[each.value].id
+
+  site_config {}
+}
