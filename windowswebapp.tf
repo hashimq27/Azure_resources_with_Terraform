@@ -20,7 +20,7 @@ resource "azurerm_windows_web_app" "windowswebbapp" {
 resource "azurerm_windows_web_app_slot" "windowsappslot" {
   for_each       = {for x in local.deployment: x=>x}
   name           = each.key
-  app_service_id = azurerm_windows_web_app.windowsappslot[each.value].id
+  app_service_id = azurerm_windows_web_app.windowswebbapp[each.value].id
 
   site_config {}
 }
