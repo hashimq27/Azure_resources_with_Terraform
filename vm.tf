@@ -1,7 +1,20 @@
+resource "azurerm_subnet" "internal" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.batch06.name
+  virtual_network_name = azurerm_virtual_network.vm.name
+  address_prefixes     = ["10.0.2.0/24"]
+}
+
 resource "azurerm_network_interface" "main" {
   name                = "netinterface"
   location            = azurerm_resource_group.batch06.location
   resource_group_name = azurerm_resource_group.batch06.name
+
+  ip_configuration {
+    name                          = "testconfiguration1"
+    subnet_id                     = azurerm_subnet.internal.id
+    private_ip_address_allocation = "Dynamic"
+  }
 }
 
 resource "azurerm_virtual_machine" "main" {
