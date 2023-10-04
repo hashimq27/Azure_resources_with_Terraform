@@ -39,7 +39,7 @@ locals {
 
 resource "azurerm_application_gateway" "network" {
   for_each            = azurerm_firewall_policy.firepolicy
-  firewall_policy_id  = "${each.key}"
+  firewall_policy_id  = each.value.id
   name                = "${var.prefix}-${each.key}"
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
@@ -79,7 +79,7 @@ resource "azurerm_application_gateway" "network" {
   }
 
    http_listener {
-    firewall_policy_id             = "${each.key}"
+    firewall_policy_id             = each.value.id
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
