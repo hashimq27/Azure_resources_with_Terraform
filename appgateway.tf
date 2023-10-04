@@ -103,7 +103,7 @@ resource "azurerm_application_gateway" "network" {
 
 resource "azurerm_firewall_policy" "firepolicy" {
   for_each            = {for x in local.gateways: x=> x}
-  name                = "${var.prefix}_${each.key}"
+  name                = "${var.prefix}"
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
 }
