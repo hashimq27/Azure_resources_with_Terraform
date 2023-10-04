@@ -38,8 +38,8 @@ locals {
 }
 
 resource "azurerm_application_gateway" "network" {
-  for_each            = {for x in local.gateways: x=> x}
-  name                = each.key
+  for_each            = azurerm_firewall_policy.firepolicy
+  name                = "${each.key}"
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
 
@@ -77,13 +77,15 @@ resource "azurerm_application_gateway" "network" {
     request_timeout       = 60
   }
 
-  http_listener {
-    name                           = [for x in azurerm_application_gateway.network: x.listener_name]
-    frontend_ip_configuration_name = [for x in azurerm_application_gateway.network: x.frontend_ip_configuration_name]
-    frontend_port_name             = [for x in azurerm_application_gateway.network: x.frontend_port_name]
+   http_listener {
+    for_each                       = azurerm_firewall_policy.firepolicy
+    firewall_policy_id             = each.key
+    name                           = local.listener_name
+    frontend_ip_configuration_name = local.frontend_ip_configuration_name
+    frontend_port_name             = local.frontend_port_name
     protocol                       = "Http"
   }
-
+  
   request_routing_rule {
     name                       = local.request_routing_rule_name
     rule_type                  = "Basic"
@@ -101,7 +103,8 @@ resource "azurerm_application_gateway" "network" {
 }
 
 resource "azurerm_firewall_policy" "firepolicy" {
-  name                = [for x in azurerm_application_gateway.network: x]
+  for_each            = {for x in local.gateways: x=> x}
+  name                = "${var.prefix}_${each.key}"
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
 }
