@@ -38,7 +38,8 @@ locals {
 }
 
 resource "azurerm_application_gateway" "network" {
-  name                = "example-appgateway"
+  for_each            = {for x in local.gateways: x=> x}
+  name                = each.key
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
 
@@ -77,9 +78,10 @@ resource "azurerm_application_gateway" "network" {
   }
 
   http_listener {
-    name                           = local.listener_name
-    frontend_ip_configuration_name = local.frontend_ip_configuration_name
-    frontend_port_name             = local.frontend_port_name
+    for_each                       = azurerm_application_gateway.network
+    name                           = each.value.listener_name
+    frontend_ip_configuration_name = each.value.frontend_ip_configuration_name
+    frontend_port_name             = each.value.frontend_port_name
     protocol                       = "Http"
   }
 
@@ -97,4 +99,11 @@ resource "azurerm_application_gateway" "network" {
     rule_set_version           = 3.2
     
   }
+}
+
+resource "azurerm_firewall_policy" "firepolicy" {
+  for_each            = azurerm_application_gateway.network
+  name                = each.key
+  resource_group_name = azurerm_resource_group.batch06.name
+  location            = azurerm_resource_group.batch06.location
 }
