@@ -78,9 +78,9 @@ resource "azurerm_application_gateway" "network" {
   }
 
   http_listener {
-    name                           = each.value.listener_name
-    frontend_ip_configuration_name = each.value.frontend_ip_configuration_name
-    frontend_port_name             = each.value.frontend_port_name
+    name                           = [for x in azurerm_application_gateway.network: x.listener_name]
+    frontend_ip_configuration_name = [for x in azurerm_application_gateway.network: x.frontend_ip_configuration_name]
+    frontend_port_name             = [for x in azurerm_application_gateway.network: x.frontend_port_name]
     protocol                       = "Http"
   }
 
@@ -101,8 +101,7 @@ resource "azurerm_application_gateway" "network" {
 }
 
 resource "azurerm_firewall_policy" "firepolicy" {
-  for_each            = azurerm_application_gateway.network
-  name                = each.key
+  name                = [for x in azurerm_application_gateway.network: x]
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
 }
