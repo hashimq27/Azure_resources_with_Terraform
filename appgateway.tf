@@ -78,7 +78,6 @@ resource "azurerm_application_gateway" "network" {
   }
 
   http_listener {
-    for_each                       = azurerm_application_gateway.network
     name                           = each.value.listener_name
     frontend_ip_configuration_name = each.value.frontend_ip_configuration_name
     frontend_port_name             = each.value.frontend_port_name
