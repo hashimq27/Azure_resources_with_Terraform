@@ -78,7 +78,6 @@ resource "azurerm_application_gateway" "network" {
   }
 
    http_listener {
-    for_each                       = azurerm_firewall_policy.firepolicy
     firewall_policy_id             = each.key
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
