@@ -79,7 +79,7 @@ resource "azurerm_application_gateway" "network" {
   }
 
    http_listener {
-    firewall_policy_id             = each.key
+    firewall_policy_id             = "${each.key}"
     name                           = local.listener_name
     frontend_ip_configuration_name = local.frontend_ip_configuration_name
     frontend_port_name             = local.frontend_port_name
