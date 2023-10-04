@@ -5,12 +5,24 @@ resource "azurerm_subnet" "internal" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+resource "azurerm_network_interface" "main" {
+  name                = "netinterface"
+  location            = azurerm_resource_group.batch06.location
+  resource_group_name = azurerm_resource_group.batch06.name
+
+  ip_configuration {
+    name                          = "testconfiguration1"
+    subnet_id                     = azurerm_subnet.internal.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
 
 resource "azurerm_virtual_machine" "main" {
   for_each              = {for x in local.deployment: x=> x}
   name                  = each.key
   location              = azurerm_resource_group.batch06.location
   resource_group_name   = azurerm_resource_group.batch06.name
+  network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = "Standard_DS1_v2"
 
   # Uncomment this line to delete the OS disk automatically when deleting the VM
