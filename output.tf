@@ -11,5 +11,5 @@ output "linuxapp" {
 }
 
 output "storageaccounts"{
-    value=[for x in local.local.storage_account_list: x]
+    value=[for x in local.storage_account_list: x]
 }
