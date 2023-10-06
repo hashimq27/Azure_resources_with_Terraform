@@ -1,5 +1,5 @@
 resource "azurerm_service_plan" "servplan" {
-  for_each            = {for app in local.linu_app: "${app.name}"=> app}
+  for_each            = {for app in local.linux_app: "${app.name}"=> app}
   name                = each.value.name
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
