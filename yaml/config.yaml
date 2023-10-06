@@ -6,4 +6,4 @@ listoflinuxapp:
 listofwinapp:
   - name: firstwindowapp
     os_type: "Windows"
-    sku_name: "2P1v"
+    sku_name: "P1v2"
