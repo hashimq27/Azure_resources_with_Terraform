@@ -1,9 +1,10 @@
 resource "azurerm_service_plan" "servplan" {
-  name                = "example-plan"
+  for_each            = {for app in local.linu_app: "${app.name}"=> app}
+  name                = each.value.name
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
-  os_type             = "Linux"
-  sku_name            = "P1v2"
+  os_type             = each.value.os_type
+  sku_name            = each.value.sku_name
 }
 
 resource "azurerm_linux_web_app" "linwebapp" {
