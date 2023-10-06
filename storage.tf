@@ -10,18 +10,18 @@ resource "azurerm_storage_account" "awp" {
     environment = "staging"
   }
 }
-# resource "azurerm_storage_container" "storecont" {
-#   for_each              = azurerm_storage_account.awp
-#   name                  = each.value.name
-#   storage_account_name  = each.value.name
-#   container_access_type = var.access_type
-# }
+resource "azurerm_storage_container" "storecont" {
+  for_each              = azurerm_storage_account.awp
+  name                  = each.value.name
+  storage_account_name  = each.value.name
+  container_access_type = var.access_type
+}
 
-# resource "azurerm_storage_blob" "blobstorage" {
-#   for_each               = azurerm_storage_account.awp
-#   name                   = each.value.name
-#   storage_account_name   = each.value.name
-#   storage_container_name = each.value.name
-#   type                   = var.storage_type
-#   source                 = var.storage_source
-# }
+resource "azurerm_storage_blob" "blobstorage" {
+  for_each               = azurerm_storage_account.awp
+  name                   = each.value.name
+  storage_account_name   = each.value.name
+  storage_container_name = each.value.name
+  type                   = var.storage_type
+  source                 = var.storage_source
+}

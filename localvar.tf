@@ -29,7 +29,7 @@ storageaccount=[for f in fileset("${path.module}/yaml", "[^_]*.yaml") : yamldeco
       for storageaccs in try(account.listofstorage, []) :{
         name=storageaccs.name
         account_tier=storageaccs.account_tier
-        account_replictation_type=storageaccs.account_replication_type
+        account_replication_type=storageaccs.account_replication_type
               }
     ]
 ])
