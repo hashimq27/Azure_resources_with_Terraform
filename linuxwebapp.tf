@@ -11,8 +11,8 @@ resource "azurerm_linux_web_app" "linwebapp" {
   for_each            = azurerm_service_plan.servplan
   name                = each.value.name
   resource_group_name = azurerm_resource_group.batch06.name
-  location            = azurerm_service_plan.servplan.location
-  service_plan_id     = azurerm_service_plan.servplan.id
+  location            = each.value.location 
+  service_plan_id     = each.value.id
 
   site_config {}
 }
