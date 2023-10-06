@@ -13,7 +13,7 @@ locals {
               }
     ]
 ])
-    linux_app=[for f in fileset("${path.module}/configs", "[^_]*.yaml") : yamldecode(file("${path.module}/yaml/${f}"))]
+    win_app=[for f in fileset("${path.module}/configs", "[^_]*.yaml") : yamldecode(file("${path.module}/yaml/${f}"))]
     win_app_list = flatten([
     for app in local.win_app : [
       for winapps in try(app.listofwinapp, []) :{
