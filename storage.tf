@@ -18,10 +18,10 @@ resource "azurerm_storage_container" "storecont" {
 }
 
 resource "azurerm_storage_blob" "blobstorage" {
-  for_each               = {for name in local.student_names: name=>name}
-  name                   = "${each.key}"
-  storage_account_name   = azurerm_storage_account.awp.name
-  storage_container_name = azurerm_storage_container.storecont.name
+  for_each               = azurerm_storage_account.awp
+  name                   = each.value.name
+  storage_account_name   = each.value.name
+  storage_container_name = each.value.name
   type                   = var.storage_type
   source                 = var.storage_source
 }
