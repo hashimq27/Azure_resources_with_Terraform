@@ -11,7 +11,8 @@ resource "azurerm_storage_account" "awp" {
   }
 }
 resource "azurerm_storage_container" "storecont" {
-  name                  = "${var.prefix}cont${var.env}"
+  for_each              = azurerm_storage_account.awp
+  name                  = each.value.name
   storage_account_name  = each.value.name
   container_access_type = var.access_type
 }
