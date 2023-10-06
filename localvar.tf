@@ -23,4 +23,14 @@ locals {
               }
     ]
 ])
+storageaccount=[for f in fileset("${path.module}/yaml", "[^_]*.yaml") : yamldecode(file("${path.module}/yaml/${f}"))]
+    storage_account_list = flatten([
+    for account in local.storageaccount : [
+      for storageaccs in try(app.listofstorage, []) :{
+        name=storageaccs.name
+        account_tier=storageaccs.account_tier
+        account_replictation_type=storageaccs.account_replication_type
+              }
+    ]
+])
 }

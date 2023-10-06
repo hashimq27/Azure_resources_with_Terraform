@@ -1,9 +1,10 @@
 resource "azurerm_storage_account" "awp" {
-  name                     = "${var.prefix}storage${var.env}"
+  for_each                 = {for acc in local.storage_account_list: "${acc.name}"=> acc}
+  name                     = each.value.name
   resource_group_name      = azurerm_resource_group.batch06.name
   location                 = azurerm_resource_group.batch06.location
-  account_tier             = "Standard"
-  account_replication_type = "GRS"
+  account_tier             = each.value.account_tier
+  account_replication_type = each.value.account_replication_type
 
   tags = {
     environment = "staging"

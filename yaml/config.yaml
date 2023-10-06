@@ -7,3 +7,8 @@ listofwinapp:
   - name: firstwindowapp
     os_type: "Windows"
     sku_name: "P1v2"
+
+listofstorage:
+  - name: storageaccount
+    account_tier: "Standard"
+    account_replictation_type: "GRS"
