@@ -2,3 +2,8 @@ listoflinuxapp:
   - name: firstlinuxapp    
     os_type: Linux
     sku_name: P1v2
+
+listofwinapp:
+  - name: firstwindowapp
+    os_type: "Windows"
+    sku_name: "2P1v"

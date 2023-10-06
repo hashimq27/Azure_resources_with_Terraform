@@ -1,17 +1,18 @@
 resource "azurerm_service_plan" "windowservplan" {
-  name                = "example-windows"
+  for_each            = {for app in local.win_app_list: "${app.name}"=> app}
+  name                = each.value.name
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
-  sku_name            = "P1v2"
-  os_type             = "Windows"
+  sku_name            = each.value.sku_name
+  os_type             = each.value.os_type
 }
 
 resource "azurerm_windows_web_app" "windowswebbapp" {
-  for_each            = {for x in local.deployment: x=>x}
-  name                = each.key
+  for_each            = azurerm_service_plan.windowservplan
+  name                = each.value.name
   resource_group_name = azurerm_resource_group.batch06.name
-  location            = azurerm_service_plan.windowservplan.location
-  service_plan_id     = azurerm_service_plan.windowservplan.id
+  location            = each.value.location
+  service_plan_id     = each.value.id
 
   site_config {}
 }
