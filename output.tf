@@ -9,3 +9,7 @@ output "appgateway" {
 output "linuxapp" {
     value=[for x in local.linux_app_list: x]
 }
+
+output "storageaccounts"{
+    value=[for x in local.local.storage_account_list: x]
+}
