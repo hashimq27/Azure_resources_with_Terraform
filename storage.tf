@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "awp" {
 resource "azurerm_storage_container" "storecont" {
   for_each              = azurerm_storage_account.awp
   name                  = each.value.name
-  storage_account_name  = each.value.storage_account_name
+  storage_account_name  = azurerm_storage_account.awp.name
   container_access_type = var.access_type
 }
 
