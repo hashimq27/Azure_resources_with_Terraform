@@ -12,4 +12,3 @@ listofstorage:
   - name: storageaccount
     account_tier: "Standard"
     account_replication_type: "GRS"
-    container_access_type: "private"
