@@ -20,8 +20,8 @@ resource "azurerm_storage_container" "storecont" {
 resource "azurerm_storage_blob" "blobstorage" {
   for_each               = azurerm_storage_account.awp
   name                   = each.value.name
-  storage_account_name   = each.value.storage_account_name
-  storage_container_name = each.value.storage_container_name
+  storage_account_name   = each.value.name
+  storage_container_name = each.value.name
   type                   = var.storage_type
   source                 = var.storage_source
 }
