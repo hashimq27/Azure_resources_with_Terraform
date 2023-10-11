@@ -53,9 +53,6 @@ locals {
     for waf in local.waf_policy : [
       for policy in try(waf.listofwafpolicies, []) :{
         name=policy.name
-        managed_rules=policy.managed_rules
-            version=policy.version
-          
               }
     ]
 ])
