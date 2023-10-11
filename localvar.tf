@@ -55,9 +55,9 @@ locals {
         name=policy.name
         version=policy.managed_rules.managed_rule_set.version
         rule_group_name=policy.managed_rules.managed_rule_set.rule_group_override.rule_group_name
-        id=policy.id
-        enabled=policy.enabled
-        action=policy.action
+        id=policy.managed_rules.managed_rule_set.rule_group_override.rule.id
+        enabled=policy.managed_rules.managed_rule_set.rule_group_override.rule.enabled
+        action=policy.managed_rules.managed_rule_set.rule_group_override.rule.action
               }
     ]
 ])
