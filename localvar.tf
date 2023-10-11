@@ -53,6 +53,11 @@ locals {
     for waf in local.waf_policy : [
       for policy in try(waf.listofwafpolicies, []) :{
         name=policy.name
+        version=policy.version
+        rule_group_name=policy.rule_group_name
+        id=policy.id
+        enabled=policy.enabled
+        action=policy.action
               }
     ]
 ])
