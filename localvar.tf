@@ -43,9 +43,9 @@ locals {
     sql_server_list = flatten([
     for server in local.sql_server : [
       for sqlservers in try(server.listofsqlserver, []) :{
-        name=sql_server.name
-        administrator_login=sql_server.administrator_login
-        administrator_login_password=sql_server.administrator_login_password     
+        name=sqlservers.name
+        administrator_login=sqlservers.administrator_login
+        administrator_login_password=sqlservers.administrator_login_password     
               }
     ]
 ])
