@@ -17,8 +17,7 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
       operator           = each.value.operator
       negation_condition = each.value.negation_condition
       match_values       = each.value.match_values
-
+    }
     action = each.value.action
   }
-}
 }
