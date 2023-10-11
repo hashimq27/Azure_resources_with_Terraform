@@ -19,16 +19,12 @@ listofsqlserver:
 
 listofwafpolicies:
   - name: wafpolicy
-    custom_rules:
-      name: "Rule1"
-      priority: 1
-      rule_type: "MatchRule"
-      matched_conditions:
-        matched_variable:
-          variable_name: "RemoteAddr"
-        operator: "IPMatch"
-        negation_condition: false
-        match_values: ["192.168.1.0/24", "10.0.0.0/24"]
-      action: "Block"
     managed_rules:
-      
+      managed_rule_set:
+        version: "3.2"
+        rule_group_override:
+          rule_group_name: "REQUEST-920-PROTOCOL-ENFORCEMENT"
+          rule:
+            id: "920440"
+            enabled: true
+            action: "Block"
