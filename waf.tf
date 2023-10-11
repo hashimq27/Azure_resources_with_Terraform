@@ -26,6 +26,29 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
       selector                = "x-company-secret-header"
       selector_match_operator = "Equals"
     }
-}
-}
+    exclusion {
+      match_variable          = "RequestCookieNames"
+      selector                = "too-tasty"
+      selector_match_operator = "EndsWith"
+    }
+
+    managed_rule_set {
+      type    = "OWASP"
+      version = "3.2"
+      rule_group_override {
+        rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
+        rule {
+          id      = "920300"
+          enabled = true
+          action  = "Log"
+        }
+
+        rule {
+          id      = "920440"
+          enabled = true
+          action  = "Block"
+        }
+      }
+    }
+  }
 }
