@@ -20,7 +20,7 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
     }
     action = each.value.action
 
-   managed_rules {
+  managed_rules {
     exclusion {
       match_variable          = "RequestHeaderNames"
       selector                = "x-company-secret-header"
