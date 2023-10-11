@@ -6,13 +6,13 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
 
  managed_rules {
     managed_rule_set {
-      version = config.mananged_rule_set.version
+      version = each.value.version
       rule_group_override {
-        rule_group_name = config.rule_group_override.rule_group_name
+        rule_group_name = each.value.rule_group_name
         rule {
-          id      = config.rule.id
-          enabled = config.rule.enabled
-          action  = config.rule.action
+          id      = each.value.id
+          enabled = each.value.enabled
+          action  = each.value.action
         }
       }
     }
