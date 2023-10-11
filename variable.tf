@@ -122,3 +122,9 @@ variable "subnet_back"{
   type=string
   default="backend"
 }
+
+variable "administrator_login" {
+}
+
+variable "administrator_login_password" {
+}
