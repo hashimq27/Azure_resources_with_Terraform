@@ -20,9 +20,11 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
     }
     action = each.value.action
 
-  managed_rule_set {
-      type    = "DefaultRuleSet"
-      version = "1.0"
-  }
+  managed_rules {
+    exclusion {
+      match_variable          = "RequestHeaderNames"
+      selector                = "x-company-secret-header"
+      selector_match_operator = "Equals"
+    }
 }
 }
