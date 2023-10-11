@@ -5,14 +5,14 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
 
  managed_rules {
     managed_rule_set {
-      version = each.value.version
+      version = "3.2"
       rule_group_override {
-        rule_group_name = each.value.rule_group_name
+        rule_group_name = "REQUEST-920-PROTOCOL-ENFORCEMENT"
 
         rule {
-          id      = each.value.id
-          enabled = each.value.enabled
-          action  = each.value.action
+          id      = "920440"
+          enabled = true
+          action  = "Block"
         }
       }
     }
