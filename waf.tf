@@ -19,5 +19,10 @@ resource "azurerm_web_application_firewall_policy" "wafpol" {
       match_values       = each.value.match_values
     }
     action = each.value.action
+
+  managed_rule {
+    type    = "DefaultRuleSet"
+    version = "1.0"
   }
+}
 }
