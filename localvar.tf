@@ -44,9 +44,7 @@ locals {
     for server in local.sql_server : [
       for sqlservers in try(server.listofsqlserver, []) :{
         name=sqlservers.name
-        version=sqlservers.version
-        administrator_login=sqlservers.administrator_login
-        administrator_login_password=sqlservers.administrator_login_password     
+        version=sqlservers.version   
               }
     ]
 ])
