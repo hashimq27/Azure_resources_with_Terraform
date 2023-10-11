@@ -1,6 +1,5 @@
 resource "azurerm_web_application_firewall_policy" "wafpol" {
-  for_each            = {for policy in local.waf_policy_list: "${policy.name}" => policy}
-  name                = each.value.name
+  name                = "example"
   resource_group_name = azurerm_resource_group.batch06.name
   location            = azurerm_resource_group.batch06.location
 
